@@ -124,7 +124,24 @@
 
             var gutter = this.props.gutter;
 
-            if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
+            var gutter = this.props.gutter;
+
+            var maxToolbarPosition = window.innerWidth - domNode.offsetWidth;
+
+            if (maxToolbarPosition < left) {
+
+                var offsetDifference = left - maxToolbarPosition;
+
+                left = maxToolbarPosition;
+
+                if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
+                    left = left - gutter.left - (domNode.offsetWidth / 2) + (offsetDifference / 3);
+
+                    top = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (top + gutter.top) : (top - domNode.offsetHeight - gutter.top);
+
+                } 
+
+            } else if (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM || direction === CKEDITOR.SELECTION_BOTTOM_TO_TOP) {
                 left = left - gutter.left - (domNode.offsetWidth / 2);
 
                 top = (direction === CKEDITOR.SELECTION_TOP_TO_BOTTOM) ? (top + gutter.top) :
