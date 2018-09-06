@@ -66,7 +66,11 @@
 
                 var endPoint = spy.getCall(0).args[1];
 
-                assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                if ((TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2 < 0) {
+                    assert.strictEqual(endPoint[0],0);
+                } else {
+                    assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                }
             });
         });
 
@@ -91,7 +95,11 @@
 
                 var endPoint = spy.getCall(0).args[1];
 
-                assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                if ((TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2 < 0) {
+                    assert.strictEqual(endPoint[0],0);
+                } else {
+                    assert.strictEqual(endPoint[0], (TEST_OBJECT_WIDTH - TEST_TOOLBAR_WIDTH) / 2);
+                }
             });
         });
     });
