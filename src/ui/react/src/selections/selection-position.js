@@ -24,10 +24,13 @@
 
         var widgetXY = toolbar.getWidgetXYPoint(rect.left + rect.width / 2 - scrollPosition.x, rect.top + scrollPosition.y, CKEDITOR.SELECTION_BOTTOM_TO_TOP);
 
-        new CKEDITOR.dom.element(toolbarNode).setStyles({
-        	left: widgetXY[0] + 'px',
-            top: widgetXY[1] + 'px'
-        });
+        toolbar.moveToPoint([
+            widgetXY[0],
+            widgetXY[1]
+        ], [
+            widgetXY[0],
+            widgetXY[1]
+        ]);
     };
 
     /**
