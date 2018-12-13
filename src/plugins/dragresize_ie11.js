@@ -50,30 +50,24 @@
             // Top-right corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_ne{' +
                 'cursor:ne-resize;' +
-                'left:auto;' +
                 'right:-5px;' +
-                'top:-5px;' +
             '}' +
             // Top-left corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_nw{' +
-                'cursor:nw-resize;' +    
+                'cursor:nw-resize;' +
                 'left:-5px;' +
-                'right:auto;' +
-                'top:-5px;' +
             '}' +
             // Bottom-right corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_se{' +
-                'bottom:-5px;' +
+                'bottom:0px;' +
                 'cursor:se-resize;' +
-                'left:auto;' +
                 'right:-5px;' +
             '}' +
             // Bottom-left corner style of the resizer.
             '.cke_image_resizer.cke_image_resizer_sw{' +
-                'bottom:-5px;' +
+                'bottom:0px;' +
                 'cursor:sw-resize;' +
                 'left:-5px;' +
-                'right:auto;' +
             '}' +
             '.cke_widget_wrapper:hover .cke_image_resizer,' +
             '.cke_image_resizer.cke_image_resizing{' +
@@ -1129,6 +1123,7 @@
         var editor = widget.editor,
             editable = editor.editable(),
             doc = editor.document,
+            image = widget.element.$,
 
             // Store the resizer in a widget for testing (#11004).
             resizer = widget.resizer = doc.createElement( 'span' ),
@@ -1139,11 +1134,16 @@
             resizer_se = doc.createElement( 'span' ),
             resizer_sw = doc.createElement( 'span' );
 
+        image.parentElement.style.display = 'inline';
+        widget.element.removeAttribute('style');
+
         resizer_ne.addClass( 'cke_image_resizer' );
         resizer_ne.addClass( 'cke_image_resizer_ne' );
+        resizer_ne.$.style.bottom = image.height + 'px';
 
         resizer_nw.addClass( 'cke_image_resizer' );
         resizer_nw.addClass( 'cke_image_resizer_nw' );
+        resizer_nw.$.style.bottom = image.height + 'px';
 
         resizer_se.addClass( 'cke_image_resizer' );
         resizer_se.addClass( 'cke_image_resizer_se' );
@@ -1315,6 +1315,13 @@
                 if ( newWidth >= 15 && newHeight >= 15 ) {
                     image.$.style.width = newWidth + 'px';
                     image.$.style.height = newHeight + 'px';
+                    widget.updateDragHandlerPosition();
+
+                    var resizerNE = widget.resizer.$.children[0];
+                    var resizerNW = widget.resizer.$.children[1];
+
+                    resizerNE.style.bottom = newHeight + 'px';
+                    resizerNW.style.bottom = newHeight + 'px';
 
                     updateData = true;
                 } else {
@@ -1337,6 +1344,13 @@
                 if ( updateData ) {
                     widget.element.$.style.width = newWidth + 'px';
                     widget.element.$.style.height = newHeight + 'px';
+                    widget.updateDragHandlerPosition();
+
+                    var resizerNE = widget.resizer.$.children[0];
+                    var resizerNW = widget.resizer.$.children[1];
+
+                    resizerNE.style.bottom = newHeight + 'px';
+                    resizerNW.style.bottom = newHeight + 'px';
 
                     // Save another undo snapshot: after resizing.
                     editor.fire( 'saveSnapshot' );
