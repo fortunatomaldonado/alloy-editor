@@ -869,6 +869,10 @@
                 wrapper.addClass( alignClasses[ alignmentsObj[ align ] ] );
             }
         } else {
+            var image = wrapper.$.querySelector('img');
+
+            image.removeAttribute('style');
+
             if ( align == 'center' ) {
                 if ( hasCaption )
                     wrapper.setStyle( 'text-align', 'center' );
@@ -878,17 +882,15 @@
                 wrapper.removeStyle( 'float' );
             }
             else {
-                if ( align == 'none' )
+                if ( align == 'none' ) {
                     wrapper.removeStyle( 'float' );
-                else
+                } else {
+                    image.setAttribute('style', 'float: ' + align);
                     wrapper.setStyle( 'float', align );
+                }
 
                 wrapper.removeStyle( 'text-align' );
             }
-
-            var image = wrapper.$.querySelector('img');
-
-            image.removeAttribute('style');
         }
     }
 
