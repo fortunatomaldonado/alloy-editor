@@ -846,7 +846,10 @@
     function setWrapperAlign( widget, alignClasses ) {
         var wrapper = widget.wrapper,
             align = widget.data.align,
-            hasCaption = widget.data.hasCaption;
+            hasCaption = widget.data.hasCaption,
+            image = wrapper.$.querySelector('img');
+
+        image.removeAttribute('style');
 
         if ( alignClasses ) {
             // Remove all align classes first.
@@ -869,10 +872,6 @@
                 wrapper.addClass( alignClasses[ alignmentsObj[ align ] ] );
             }
         } else {
-            var image = wrapper.$.querySelector('img');
-
-            image.removeAttribute('style');
-
             if ( align == 'center' ) {
                 if ( hasCaption )
                     wrapper.setStyle( 'text-align', 'center' );
@@ -1359,6 +1358,9 @@
      * @param {String} imageAlignment The image alignment value to be removed
      */
     var removeWidgetAlignment = function(widget, imageAlignment) {
+        image = widget.wrapper.$.querySelector('img');
+
+        image.removeAttribute('style');
         if (imageAlignment === 'left' || imageAlignment === 'right') {
             widget.wrapper.removeStyle('float');
         } else if (imageAlignment === 'center') {
