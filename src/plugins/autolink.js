@@ -219,6 +219,35 @@
 
                 this._currentKeyCode = nativeEvent.keyCode;
 
+                if (this._currentKeyCode === 8) {
+                    var editor = event.listenerData.editor;
+
+                    var range = editor.getSelection().getRanges()[0];
+
+                    var temp = range.startContainer.$.style ? range.startContainer.$ : range.startContainer.$.parentNode;
+
+                    if(temp.style) {
+                        if(temp.style.textAlign === 'center'){
+                            temp.removeAttribute('style');
+                        }
+                    }
+
+                }
+
+                if (this._currentKeyCode === 13) {
+                    var editor = event.listenerData.editor;
+
+                    var range = editor.getSelection().getRanges()[0];
+
+                    var temp = range.startContainer.$.style ? range.startContainer.$ : range.startContainer.$.parentNode;
+
+                    if(temp.style) {
+                        if(temp.style.textAlign === 'center'){
+                            temp.removeAttribute('style');
+                        }
+                    }
+                }
+
                 if (DELIMITERS.indexOf(this._currentKeyCode) !== -1) {
                     var editor = event.listenerData.editor;
 

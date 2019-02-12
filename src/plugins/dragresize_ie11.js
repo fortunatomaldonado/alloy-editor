@@ -528,11 +528,11 @@
                     var el = shift.element;
 
                     // Alignment changed.
-                    if ( shift.changed.align ) {
+                    if ( shift.changed.align || shift.element.$.style.marginLeft === 'auto' && shift.element.$.style.marginRight === 'auto') {
                         // No caption in the new state.
                         if ( !shift.newData.hasCaption ) {
                             // Changed to "center" (non-captioned).
-                            if ( newValue == 'center' ) {
+                            if ( newValue == 'center' || shift.element.$.style.marginLeft === 'auto' && shift.element.$.style.marginRight === 'auto') {
                                 shift.deflate();
                                 shift.element = wrapInCentering( editor, el );
                             }
